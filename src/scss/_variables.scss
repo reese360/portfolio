@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Liu+Jian+Mao+Cao&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@900&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap");
+
+$font-handwriting: "Liu Jian Mao Cao", cursive;
+$font-roboto: "Roboto Mono", monospace;
+$font-stencil: "Big Shoulders Stencil Display", cursive;
+$font-open: "Open Sans", sans-serif;
+$font-quicksand: "Quicksand", sans-serif;
+$font-raleway: "Raleway", sans-serif;
+$font-press-start: "Press Start 2P", cursive;
+$font-anton: "Anton", sans-serif;
+$font-hye: "Do Hyeon", sans-serif;
+$font-josefin: "Josefin Sans", sans-serif;
+
+// size for responsive screen width
+$resp-screen-limit: 1200px;
+
+// height of each view
+$view-height: 150vh;
+
+// colors
+$color-purple: #8459bb;
+$color-pink: #e55381;
+$color-pink2: #f8407a;
+$color-green: #41ae84;
+$color-orange: #f08a5d;
+$color-offgray: #333333;
+
+// default font
+
+$card-padding: 10px;
+$card-border-radius: 10px;
+
+// animation
+$cubic-bezier-timing: cubic-bezier(0.86, 0, 0.07, 1);

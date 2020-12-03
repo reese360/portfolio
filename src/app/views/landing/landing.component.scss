@@ -1,0 +1,245 @@
+@import "src/scss/variables";
+@import "src/scss/animations";
+
+$anim-delay: 300ms;
+$anim-enterSlideUp-dur: 1250ms;
+
+.landing-container {
+	position: relative;
+	width: 100vw;
+	height: $view-height;
+}
+
+.landing-text-container {
+	// user-select: none;
+	position: absolute;
+	color: #fff;
+
+	// desktop layout
+	@media screen and (min-width: $resp-screen-limit) {
+		bottom: 55vh;
+		left: 5vw;
+	}
+
+	// mobile layout
+	@media all and (max-width: $resp-screen-limit) {
+		bottom: 60vh;
+		left: 5vw;
+	}
+}
+
+.headline-clip {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.landing-headline-1 {
+	.headline-text {
+		font-family: $font-roboto;
+
+		// desktop layout
+		@media screen and (min-width: $resp-screen-limit) {
+			font-size: 3ch;
+			padding-left: 10px;
+			letter-spacing: -1px;
+		}
+
+		// mobile layout
+		@media all and (max-width: $resp-screen-limit) {
+			font-size: 2ch;
+			letter-spacing: -1px;
+			padding-left: 5px;
+			padding-bottom: 0vh;
+		}
+	}
+}
+
+.landing-enterUp {
+	// animation-duration: $anim-enterSlideUp-dur;
+	animation-fill-mode: both;
+	animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
+	animation-timing-function: $cubic-bezier-timing;
+	animation-name: anim-enterSlideUp;
+}
+
+.landing-exitUp {
+	// animation-duration: $anim-enterSlideUp-dur;
+	animation-fill-mode: both;
+	animation-timing-function: $cubic-bezier-timing;
+	animation-name: anim-exitSlideUp;
+}
+
+.twoHeader {
+	width: fit-content;
+	display: grid;
+	grid-template-columns: auto auto;
+}
+
+.landing-headline-2 {
+	font-family: $font-roboto;
+
+	.headline-text {
+		// desktop layout
+		@media screen and (min-width: $resp-screen-limit) {
+			font-size: 15ch;
+			letter-spacing: -10px;
+			margin-bottom: -30px;
+		}
+
+		// mobile layout
+		@media all and (max-width: $resp-screen-limit) {
+			font-size: 48px;
+			letter-spacing: -5px;
+			margin-bottom: -10px;
+		}
+	}
+}
+
+.landing-background {
+	height: 100%;
+	width: 100%;
+
+	background-image: url("/assets/images/wood-bg.png");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	// desktop layout
+	@media screen and (min-width: $resp-screen-limit) {
+		filter: brightness(0.85);
+	}
+
+	// mobile layout
+	@media all and (max-width: $resp-screen-limit) {
+		filter: brightness(0.75);
+	}
+}
+
+.temp-nav {
+	display: inline;
+}
+
+.nav-item {
+	float: left;
+	font-family: $font-roboto;
+	font-size: 16px;
+	line-height: 16px;
+	padding-right: 10px;
+	text-align: left;
+	word-spacing: 0px;
+	color: #fff;
+	cursor: pointer;
+	user-select: none;
+}
+
+// static effect from https://bepatrickdavid.com/
+.movie-test {
+	position: fixed;
+	height: 200%;
+	left: -50%;
+	top: -50%;
+	width: 200%;
+	opacity: 0.7;
+	z-index: 99;
+	animation-duration: 1s;
+	animation-timing-function: steps(4);
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: normal;
+	animation-fill-mode: none;
+	animation-play-state: running;
+	animation-name: movie;
+	background-image: url("/assets/images/movie.png");
+}
+@-webkit-keyframes movie {
+	0% {
+		-webkit-transform: translate(0, 0);
+		transform: translate(0, 0);
+	}
+	10% {
+		-webkit-transform: translate(-5%, -5%);
+		transform: translate(-5%, -5%);
+	}
+	20% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	30% {
+		-webkit-transform: translate(5%, -10%);
+		transform: translate(5%, -10%);
+	}
+	40% {
+		-webkit-transform: translate(-5%, 15%);
+		transform: translate(-5%, 15%);
+	}
+	50% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	60% {
+		-webkit-transform: translate(15%, 0);
+		transform: translate(15%, 0);
+	}
+	70% {
+		-webkit-transform: translate(0, 10%);
+		transform: translate(0, 10%);
+	}
+	80% {
+		-webkit-transform: translate(-15%, 0);
+		transform: translate(-15%, 0);
+	}
+	90% {
+		-webkit-transform: translate(10%, 5%);
+		transform: translate(10%, 5%);
+	}
+	to {
+		-webkit-transform: translate(5%, 0);
+		transform: translate(5%, 0);
+	}
+}
+@keyframes movie {
+	0% {
+		-webkit-transform: translate(0, 0);
+		transform: translate(0, 0);
+	}
+	10% {
+		-webkit-transform: translate(-5%, -5%);
+		transform: translate(-5%, -5%);
+	}
+	20% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	30% {
+		-webkit-transform: translate(5%, -10%);
+		transform: translate(5%, -10%);
+	}
+	40% {
+		-webkit-transform: translate(-5%, 15%);
+		transform: translate(-5%, 15%);
+	}
+	50% {
+		-webkit-transform: translate(-10%, 5%);
+		transform: translate(-10%, 5%);
+	}
+	60% {
+		-webkit-transform: translate(15%, 0);
+		transform: translate(15%, 0);
+	}
+	70% {
+		-webkit-transform: translate(0, 10%);
+		transform: translate(0, 10%);
+	}
+	80% {
+		-webkit-transform: translate(-15%, 0);
+		transform: translate(-15%, 0);
+	}
+	90% {
+		-webkit-transform: translate(10%, 5%);
+		transform: translate(10%, 5%);
+	}
+	to {
+		-webkit-transform: translate(5%, 0);
+		transform: translate(5%, 0);
+	}
+}

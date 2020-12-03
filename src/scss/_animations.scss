@@ -1,0 +1,31 @@
+@import "src/scss/variables.scss";
+
+@keyframes anim-enterSlideUp {
+	0% {
+		transform: translateY(150%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
+
+@keyframes anim-exitSlideUp {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-150%);
+	}
+}
+
+@keyframes anim-slideDown {
+	0% {
+		transform: translateY(-150%);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
+}
