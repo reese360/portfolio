@@ -8,17 +8,9 @@ import { ProjectsComponent } from './views/projects/projects.component';
 import { ContactComponent } from './views/contact/contact.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandingComponent,
-    TimelineComponent,
-    ProjectsComponent,
-    ContactComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [AppComponent, LandingComponent, TimelineComponent, ProjectsComponent, ContactComponent],
+	imports: [BrowserModule],
+	providers: [],
+	bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

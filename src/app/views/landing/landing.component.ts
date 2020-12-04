@@ -24,29 +24,29 @@ export class LandingComponent implements AfterViewInit, ViewController {
 		Array.from(document.getElementsByClassName('headline-text') as HTMLCollectionOf<HTMLElement>).forEach((el, idx) => {
 			el.classList.remove('landing-exitUp'); // remove class if user is re-scrolling to view
 			el.classList.add('landing-enterUp');
-			if (this.initialLanding) {
-				el.style.animationDuration = this.initialAnimDuration;
-				switch (idx) {
-					case 0:
-						el.style.animationDelay = '250ms';
-						break;
-					case 1:
-						el.style.animationDelay = '1000ms';
-						break;
-					case 2:
-						el.style.animationDelay = '2000ms';
-						break;
-					case 3:
-						el.style.animationDelay = '2750ms';
-						break;
-					case 4:
-						el.style.animationDelay = '3250ms';
-						break;
-					case 5:
-						el.style.animationDelay = '3500ms';
-						break;
-				}
-			}
+			// if (this.initialLanding) {
+			// 	el.style.animationDuration = this.initialAnimDuration;
+			// 	switch (idx) {
+			// 		case 0:
+			// 			el.style.animationDelay = '250ms';
+			// 			break;
+			// 		case 1:
+			// 			el.style.animationDelay = '1000ms';
+			// 			break;
+			// 		case 2:
+			// 			el.style.animationDelay = '2000ms';
+			// 			break;
+			// 		case 3:
+			// 			el.style.animationDelay = '2750ms';
+			// 			break;
+			// 		case 4:
+			// 			el.style.animationDelay = '3250ms';
+			// 			break;
+			// 		case 5:
+			// 			el.style.animationDelay = '3500ms';
+			// 			break;
+			// 	}
+			// }
 		});
 	}
 
@@ -60,6 +60,6 @@ export class LandingComponent implements AfterViewInit, ViewController {
 	}
 
 	resetView(): void {
-		this.ngAfterViewInit();
+		this.top = this.container.nativeElement.getBoundingClientRect().top;
 	}
 }

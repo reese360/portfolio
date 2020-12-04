@@ -18,6 +18,6 @@ export class ProjectsComponent implements AfterViewInit, ViewController {
 	enterView(): void {}
 	exitView(): void {}
 	resetView(): void {
-		this.ngAfterViewInit();
+		this.top = this.container.nativeElement.getBoundingClientRect().top;
 	}
 }

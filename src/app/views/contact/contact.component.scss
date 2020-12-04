@@ -1,0 +1,28 @@
+@import "src/scss/variables";
+@import "src/scss/animations";
+
+.contact-container {
+	height: 150vh;
+	height: $view-height;
+}
+
+.contact-background {
+	height: 100%;
+	width: 100%;
+
+	background-image: url("/assets/images/view-backgrounds/paint-min.jpg");
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	// desktop layout
+	@media screen and (min-width: $resp-screen-limit) {
+		filter: brightness(0.85);
+	}
+
+	// mobile layout
+	@media all and (max-width: $resp-screen-limit) {
+		filter: brightness(0.75);
+	}
+}

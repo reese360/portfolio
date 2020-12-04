@@ -1,4 +1,19 @@
 @import "src/scss/variables";
 
 .app-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: fit-content;
+
+	// desktop layout
+	@media screen and (min-width: $resp-screen-limit) {
+		transition: transform 1500ms $cubic-bezier-timing;
+	}
+
+	// mobile layout
+	@media all and (max-width: $resp-screen-limit) {
+		transition: transform 1500ms $cubic-bezier-timing;
+	}
 }

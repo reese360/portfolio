@@ -10,7 +10,7 @@
 	height: 100%;
 	width: 100%;
 
-	background-image: url("/assets/images/brick.jpg");
+	background-image: url("/assets/images/view-backgrounds/brick-min.jpg");
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -18,11 +18,13 @@
 
 	// desktop layout
 	@media screen and (min-width: $resp-screen-limit) {
-		filter: brightness(0.85);
+		// filter: brightness(0.75);
+		background-color: rgba(117, 0, 0, 0.185);
+		background-blend-mode: multiply;
 	}
 
 	// mobile layout
 	@media all and (max-width: $resp-screen-limit) {
-		filter: brightness(0.75);
+		filter: brightness(0.6 5);
 	}
 }

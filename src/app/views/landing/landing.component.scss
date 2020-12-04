@@ -14,17 +14,16 @@ $anim-enterSlideUp-dur: 1250ms;
 	// user-select: none;
 	position: absolute;
 	color: #fff;
+	left: 5vw;
 
 	// desktop layout
 	@media screen and (min-width: $resp-screen-limit) {
-		bottom: 55vh;
-		left: 5vw;
+		bottom: 5vh;
 	}
 
 	// mobile layout
 	@media all and (max-width: $resp-screen-limit) {
-		bottom: 60vh;
-		left: 5vw;
+		bottom: 10vh;
 	}
 }
 
@@ -98,7 +97,7 @@ $anim-enterSlideUp-dur: 1250ms;
 	height: 100%;
 	width: 100%;
 
-	background-image: url("/assets/images/wood-bg.png");
+	background-image: url("/assets/images/view-backgrounds/wood.jpg");
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

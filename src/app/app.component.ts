@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { ViewController } from './interfaces/view.interface';
+import { ContactComponent } from './views/contact/contact.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { ProjectsComponent } from './views/projects/projects.component';
 import { TimelineComponent } from './views/timeline/timeline.component';
@@ -10,9 +11,11 @@ import { TimelineComponent } from './views/timeline/timeline.component';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
+	@ViewChild('app') appContainer!: ElementRef;
 	@ViewChild('landing') landingComponent!: LandingComponent;
 	@ViewChild('timeline') timelineComponent!: TimelineComponent;
 	@ViewChild('projects') projectsComponent!: ProjectsComponent;
+	@ViewChild('contact') contactComponent!: ContactComponent;
 
 	viewIdx: number = 0;
 	viewControllers: ViewController[] = [];
@@ -21,15 +24,22 @@ export class AppComponent implements AfterViewInit {
 	touchStart!: number; // store user starting touch point;
 
 	isMobile: boolean = false; // flag for mobile or desktop
-	isScrolling: boolean = false; // flag for scrolling animation44
+	isScrolling: boolean = false; // flag for scrolling animation
+
+	viewHeight: number = 100;
+	currentPos: number = 0;
 
 	// recalculate element sizing on window
 	@HostListener('window:resize', ['$event']) onResize(): void {
-		console.log('resize event');
-		this.ngAfterViewInit();
+		this.resetView();
 	}
 
 	constructor(el: ElementRef) {
+		// start at top of html body
+		// window.onbeforeunload = () => {
+		// 	window.scrollTo(0, 0);
+		// };
+
 		// determine if user is on mobile or desktop
 		this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
@@ -70,48 +80,44 @@ export class AppComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		// start at top of html body
-		window.onbeforeunload = () => {
-			window.scrollTo(0, 0);
-		};
+		this.appContainer.nativeElement.style.transform = 'translateY(0vh)';
+		this.viewControllers = [this.landingComponent, this.timelineComponent, this.projectsComponent, this.contactComponent];
+	}
 
-		this.viewControllers = [this.landingComponent, this.timelineComponent, this.projectsComponent];
+	resetView(): void {
 		this.viewControllers.forEach((view) => {
 			view.resetView();
 		});
+		// window.scroll({ top: this.currentViewController.top, behavior: 'smooth' });
 	}
 
 	async handleScroll(delta: number): Promise<void> {
 		if (!this.isScrolling) {
 			let currentIdx = this.viewIdx; // store current value
+
+			// determine next view index
 			if (delta > 0) currentIdx = currentIdx + 1 > this.viewControllers.length - 1 ? this.viewControllers.length - 1 : (currentIdx += 1);
 			else currentIdx = currentIdx - 1 < 0 ? 0 : (currentIdx -= 1);
 
 			if (currentIdx === this.viewIdx) return; // if value hasn't changed user is at top or bottom and cannot scroll further
 
 			this.isScrolling = true;
-			this.viewControllers[this.viewIdx].exitView();
+			this.viewControllers[this.viewIdx].exitView(); // exit animation
 			this.viewIdx = currentIdx;
 
-			// start view animation and scroll
-			setTimeout(
-				() => {
-					window.scroll({ top: this.currentViewController.top, behavior: 'smooth' });
-					this.currentViewController.enterView();
-					this.isScrolling = false;
-				},
-				delta > 0 ? 750 : 500 // longer duration before scrolling for scrolling down
-			);
+			// start view enter animation after scroll delay
+			setTimeout(() => {
+				this.viewControllers[this.viewIdx].enterView();
+				this.isScrolling = false;
+			}, 750);
+
+			if (delta > 0) this.currentPos -= this.viewHeight;
+			else this.currentPos += this.viewHeight;
+			this.appContainer.nativeElement.style.transform = `translateY(${this.currentPos}vh)`;
 		}
 	}
 
 	get currentViewController(): ViewController {
 		return this.viewControllers[this.viewIdx];
-	}
-
-	compTops(): void {
-		this.viewControllers.forEach((e, v) => {
-			console.log(v, e.top);
-		});
 	}
 }
