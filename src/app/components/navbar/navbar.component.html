@@ -1,0 +1,23 @@
+<div class="navbar-container">
+	<div class="nb-outer-circ" (click)="handleNavClick(0)">
+		<div class="nb-inner-circ" [ngClass]="this.currentIdx === 0 ? 'active' : 'inactive'" #view></div>
+	</div>
+	<div class="nv-circ-connector">
+		<div class="nb-circ-cxn"></div>
+	</div>
+	<div class="nb-outer-circ" (click)="handleNavClick(1)">
+		<div class="nb-inner-circ" [ngClass]="this.currentIdx === 1 ? 'active' : 'inactive'" #view></div>
+	</div>
+	<div class="nv-circ-connector">
+		<div class="nb-circ-cxn"></div>
+	</div>
+	<div class="nb-outer-circ" (click)="handleNavClick(2)">
+		<div class="nb-inner-circ" [ngClass]="this.currentIdx === 2 ? 'active' : 'inactive'" #view></div>
+	</div>
+	<div class="nv-circ-connector">
+		<div class="nb-circ-cxn"></div>
+	</div>
+	<div class="nb-outer-circ" (click)="handleNavClick(3)">
+		<div class="nb-inner-circ" [ngClass]="this.currentIdx === 3 ? 'active' : 'inactive'" #view></div>
+	</div>
+</div>

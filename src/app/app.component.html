@@ -1,4 +1,5 @@
-<div class="app-container" #app>
+<app-navbar #navigation [currentIdx]="this.viewIdx" (navItemClicked)="handleNavClick($event)"></app-navbar>
+<div class="app-container" #appWindow>
 	<app-landing #landing></app-landing>
 	<app-timeline #timeline></app-timeline>
 	<app-projects #projects></app-projects>

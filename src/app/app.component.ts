@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { ViewController } from './interfaces/view.interface';
 import { ContactComponent } from './views/contact/contact.component';
 import { LandingComponent } from './views/landing/landing.component';
@@ -11,7 +12,8 @@ import { TimelineComponent } from './views/timeline/timeline.component';
 	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
-	@ViewChild('app') appContainer!: ElementRef;
+	@ViewChild('navigation') navigationComponent!: NavbarComponent;
+	@ViewChild('appWindow') appContainer!: ElementRef;
 	@ViewChild('landing') landingComponent!: LandingComponent;
 	@ViewChild('timeline') timelineComponent!: TimelineComponent;
 	@ViewChild('projects') projectsComponent!: ProjectsComponent;
@@ -43,24 +45,13 @@ export class AppComponent implements AfterViewInit {
 		// determine if user is on mobile or desktop
 		this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-		if (!this.isMobile) {
-			// desktop event handlers
-			// event handler for scroll wheel
-			el.nativeElement.addEventListener(
-				'wheel',
-				(e: any) => {
-					e.preventDefault();
-					this.handleScroll(e.deltaY);
-				},
-				{ passive: false }
-			);
-		} else {
+		if (this.isMobile) {
 			// mobile event handlers
 			// event handler for touch start
 			el.nativeElement.addEventListener(
 				'touchstart',
 				(e: any) => {
-					e.preventDefault();
+					// e.preventDefault();
 					this.touchStart = e.changedTouches[0].clientY;
 				},
 				{ passive: false }
@@ -70,9 +61,21 @@ export class AppComponent implements AfterViewInit {
 			el.nativeElement.addEventListener(
 				'touchend',
 				(e: any) => {
-					e.preventDefault();
+					// e.preventDefault();
 					const touchEnd = e.changedTouches[0].clientY;
+					if (Math.abs(this.touchStart - touchEnd) < 100) return;
 					this.handleScroll(touchEnd > this.touchStart ? -1 : 1);
+				},
+				{ passive: false }
+			);
+		} else {
+			// desktop event handlers
+			// event handler for scroll wheel
+			el.nativeElement.addEventListener(
+				'wheel',
+				(e: any) => {
+					e.preventDefault();
+					this.handleScroll(e.deltaY);
 				},
 				{ passive: false }
 			);
@@ -92,29 +95,45 @@ export class AppComponent implements AfterViewInit {
 	}
 
 	async handleScroll(delta: number): Promise<void> {
-		if (!this.isScrolling) {
-			let currentIdx = this.viewIdx; // store current value
+		if (this.isScrolling) return;
+		let nextIdx = this.viewIdx; // store current value
 
-			// determine next view index
-			if (delta > 0) currentIdx = currentIdx + 1 > this.viewControllers.length - 1 ? this.viewControllers.length - 1 : (currentIdx += 1);
-			else currentIdx = currentIdx - 1 < 0 ? 0 : (currentIdx -= 1);
+		// determine next view index
+		if (delta > 0) nextIdx = nextIdx + 1 > this.viewControllers.length - 1 ? this.viewControllers.length - 1 : (nextIdx += 1);
+		else nextIdx = nextIdx - 1 < 0 ? 0 : (nextIdx -= 1);
 
-			if (currentIdx === this.viewIdx) return; // if value hasn't changed user is at top or bottom and cannot scroll further
+		if (nextIdx === this.viewIdx) return; // if value hasn't changed user is at top or bottom and cannot scroll further
 
-			this.isScrolling = true;
-			this.viewControllers[this.viewIdx].exitView(); // exit animation
-			this.viewIdx = currentIdx;
+		this.isScrolling = true;
+		this.viewControllers[this.viewIdx].exitView(); // exit animation
+		this.viewIdx = nextIdx;
 
-			// start view enter animation after scroll delay
-			setTimeout(() => {
-				this.viewControllers[this.viewIdx].enterView();
-				this.isScrolling = false;
-			}, 750);
+		// start view enter animation after scroll delay
+		setTimeout(() => {
+			this.viewControllers[this.viewIdx].enterView();
+			this.isScrolling = false;
+		}, 750);
 
-			if (delta > 0) this.currentPos -= this.viewHeight;
-			else this.currentPos += this.viewHeight;
-			this.appContainer.nativeElement.style.transform = `translateY(${this.currentPos}vh)`;
-		}
+		if (delta > 0) this.currentPos -= this.viewHeight;
+		else this.currentPos += this.viewHeight;
+		this.appContainer.nativeElement.style.transform = `translateY(${this.currentPos}vh)`;
+	}
+
+	handleNavClick(idx: number): void {
+		if (this.isScrolling || idx === this.viewIdx) return;
+
+		this.isScrolling = true;
+		this.viewControllers[this.viewIdx].exitView(); // exit animation
+		this.viewIdx = idx;
+
+		// start view enter animation after scroll delay
+		setTimeout(() => {
+			this.viewControllers[this.viewIdx].enterView();
+			this.isScrolling = false;
+		}, 750);
+
+		this.currentPos = this.viewIdx * -100;
+		this.appContainer.nativeElement.style.transform = `translateY(${this.currentPos}vh)`;
 	}
 
 	get currentViewController(): ViewController {

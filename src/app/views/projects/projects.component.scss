@@ -25,6 +25,8 @@
 
 	// mobile layout
 	@media all and (max-width: $resp-screen-limit) {
-		filter: brightness(0.6 5);
+		filter: brightness(0.6);
+		background-color: rgba(117, 0, 0, 0.185);
+		background-blend-mode: multiply;
 	}
 }
